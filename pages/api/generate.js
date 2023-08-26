@@ -16,6 +16,7 @@ const generateAction = async (req, res) => {
   // Run first prompt
   console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
 
+  // Calls the OpenAI API to get a response
   const baseCompletion = await openai.createCompletion({
     model: 'text-davinci-003', // Need to update
     prompt: `${basePromptPrefix}${req.body.userInput}\n`,
@@ -26,6 +27,7 @@ const generateAction = async (req, res) => {
   const basePromptOutput = baseCompletion.data.choices.pop();
 
   // In future I can also add in 2nd prompt (prompt chaining) for more refined answer
+  // This line sends response from OpenAI to frontend
   res.status(200).json({ output: basePromptOutput });
 };
 

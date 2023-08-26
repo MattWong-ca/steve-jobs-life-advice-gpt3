@@ -10,6 +10,8 @@ const Home = () => {
     setIsGenerating(true);
 
     console.log("Calling OpenAI...")
+
+    // Sends userInput as JSON to backend
     const response = await fetch('/api/generate', {
       method: 'POST',
       headers: {
@@ -18,6 +20,7 @@ const Home = () => {
       body: JSON.stringify({ userInput }),
     });
 
+    // Gets data returned from backend and sets its text as apiOutput
     const data = await response.json();
     const { output } = data;
     console.log("OpenAI replied...", output.text)
